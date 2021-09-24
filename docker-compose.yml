@@ -1,0 +1,22 @@
+version: "3"
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://${PG_USER}:${PG_PASS}@postgres:${PG_PORT}/${PG_DB}
+      PORT: ${PORT}
+      API: ${API}
+    ports:
+      - "${PORT}:${PORT}"
+    command: npm start
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "${PG_PORT}:${PG_PORT}"
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASS}
+      POSTGRES_DB: ${PG_DB}

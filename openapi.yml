@@ -1,0 +1,141 @@
+paths:
+  /:
+    get:
+      summary: Returns a list of starwars movies
+      responses:
+        '200':
+          description: An array of movies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    opening_crawl:
+                      type: string
+                    comment_count:
+                      type: integer
+        '400':
+          description: Error occurs for invalid request
+
+  /comments/{movieId}:
+    get:
+      summary: Returns a list of all comments for a starwars movie based on the id
+      parameters:
+        - name: movieId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: An array of movies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    movieId:
+                      type: integer
+                    text:
+                      type: string
+                    ip:
+                      type: string
+                    createdAt:
+                      type: string
+        '400':
+          description: Error occurs for invalid request
+        '404':
+          description: Error occurs because the movie was not found
+
+  /comments:
+    post:
+      summary: Creates a comment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                movieId:
+                  type: integer
+      responses: 
+        '201':
+          description: Comment Created Message
+
+
+  /characters/{movieId}:
+    get:
+      summary: Returns a list of characters in a starwars movie
+      parameters:
+        - name: movieId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: order
+          in: query
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          schema:
+            type: string
+        - name: filter
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of characters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    height:
+                      type: string
+                    mass:
+                      type: string
+                    hair_color:
+                      type: string
+                    skin_color:
+                      type: string
+                    eye_color:
+                      type: string
+                    birth_year:
+                      type: string
+                    gender:
+                      type: string
+                    homeworld:
+                      type: string
+                    films:
+                      type: array
+                    species:
+                      type: array
+                    vehicles:
+                      type: array
+                    starships:
+                      type: array
+                    created:
+                      type: string
+                    edited:
+                      type: string
+                    url:
+                      type: string     
+        '400':
+          description: Error occurs for invalid request
+        '404':
+          description: Error occurs because the movie was not found
